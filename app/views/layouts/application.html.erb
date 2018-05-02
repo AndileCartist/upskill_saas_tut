@@ -9,6 +9,8 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-inverse">
+
    <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
@@ -23,20 +25,24 @@
          DevMatch
          <% end %>
     </div>
-    <div class="collapse navbar-collapse" id="main-nav-collapse">
-        <div class="nav navbar-nav navbar-right">
-          <%= link_to "log in", new_user_session_path, class: "btn btn-default navbar-btn" %>
-          <%= link_to "sign up", new_user_registration_path, class: "btn btn-default navbar-btn" %>
-        </div>
-       
-      <ul class="nav navbar-nav navbar-right">
-         <li><%= link_to "About", about_path %></li>
-         <li><%= link_to "Contact Us", new_contact_path %></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-   
+       <div class="collapse navbar-collapse" id="main-nav-collapse">
+            <div class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+                    <%= link_to "log out", destroy_user_session_path, method: :delete, class: "btn btn-info navbar-btn" %>
+                    <% else %>
+                  <%= link_to "log in", new_user_session_path, class: "btn btn-info navbar-btn" %>
+                  <%= link_to "sign up", new_user_registration_path, class: "btn btn-info navbar-btn" %>
+              <% end %>
+            </div>
+           
+          <ul class="nav navbar-nav navbar-right">
+             <li><%= link_to "About", about_path %></li>
+             <li><%= link_to "Contact Us", new_contact_path %></li>
+          </ul>
+       </div>
+      </div>
+    </nav>
+  </nav>
     <div class="container">
       <% flash.each do |type,msg|  %>
       <%= content_tag :div, msg, class: "alert alert-#{type}" %>
@@ -46,3 +52,4 @@
    
   </body>
 </html>
+ 
